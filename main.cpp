@@ -47,7 +47,7 @@ void pin() //Take input from player.
     cin>>r>>c;
     r--;
     c--;
-    if(r>2||c>2)
+    if(r>2||c>2||r<0||c<0)
     {
         cout<<"Enter correct value."<<endl;
         print();
@@ -194,6 +194,8 @@ void find() //Checks if the player have a possible winning move, takes a step as
 
 void win() //Take a step (as to attack) such that it have winning possibilities in future moves.
 {
+    if(a[0][0]+a[0][2]+a[2][0]+a[2][2]>=2*t)
+    {
     for(int i=0;i<3;i++)
         {
             if( a[i][0]+a[i][1]+a[i][2]==y && (a[i][0]==y||a[i][1]==y||a[i][2]==y) )
@@ -257,8 +259,6 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
             if(done)
                 break;
         }
-    
-    
     if(a[0][0]+a[1][1]+a[2][2]==y && (a[0][0]==y||a[1][1]==y||a[2][2]==y)&&!done)
     {
         for(int i=0;i<3;i++)
@@ -284,6 +284,101 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
                 break;
             }
         }
+    }
+    }
+    else{
+        if(a[0][0]+a[1][1]+a[2][2]==y && (a[0][0]==y||a[1][1]==y||a[2][2]==y)&&!done)
+        {
+            for(int i=0;i<3;i++)
+            {
+                if(a[i][i]==0)
+                {
+                    a[i][i]=y;
+                    cout<<"Computer turn: "<<i+1<<" "<<i+1<<endl;
+                    done=1;
+                    break;
+                }
+            }
+        }
+        else if( a[0][2]+a[1][1]+a[2][0]==y && (a[0][2]==y||a[1][1]==y||a[2][0]==y) &&!done)
+        {
+            for(int i=0;i<3;i++)
+            {
+                if(a[i][2-i]==0)
+                {
+                    a[i][2-i]=y;
+                    cout<<"Computer turn: "<<i+1<<" "<<3-i<<endl;
+                    done=1;
+                    break;
+                }
+            }
+        }
+else
+{
+        for(int i=0;i<3;i++)
+        {
+            if( a[i][0]+a[i][1]+a[i][2]==y && (a[i][0]==y||a[i][1]==y||a[i][2]==y) )
+            {
+                if(i==1)
+                {
+                    for(int j=0;j<3;j++)
+                    {
+                        if(a[i][j]==0)
+                        {
+                            a[i][j]=y;
+                            cout<<"Computer turn: "<<i+1<<" "<<j+1<<endl;
+                            done=1;
+                            break;
+                        }
+                    }
+                }
+                else{
+                    for(int j=2;j>=0;j--)
+                    {
+                        if(a[i][j]==0)
+                        {
+                            a[i][j]=y;
+                            cout<<"Computer turn: "<<i+1<<" "<<j+1<<endl;
+                            done=1;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if(a[0][i]+a[1][i]+a[2][i]==y && (a[0][i]==y||a[1][i]==y||a[2][i]==y))
+            {
+                if(i==1)
+                {
+                    for(int j=0;j<3;j++)
+                    {
+                        if(a[j][i]==0)
+                        {
+                            a[j][i]=y;
+                            cout<<"Computer turn: "<<j+1<<" "<<i+1<<endl;
+                            done=1;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    for(int j=2;j>=0;j--)
+                    {
+                        if(a[j][i]==0)
+                        {
+                            a[j][i]=y;
+                            cout<<"Computer turn: "<<j+1<<" "<<i+1<<endl;
+                            done=1;
+                            break;
+                        }
+                    }
+                }
+                
+            }
+            if(done)
+                break;
+        }
+    }
     }
 }
 
@@ -363,6 +458,11 @@ int main()
             a[i][j]=0;
     cout<<"Choose your turn 1st or 2nd: ";
     cin>>t;
+    if(t!=1&&t!=2)
+    {
+        cout<<"Enter correct choice.\n";
+        main();
+    }
     cout<<"Player Symbol: "<<t<<endl;
     switch(t)
     {
