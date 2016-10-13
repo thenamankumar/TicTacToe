@@ -42,9 +42,8 @@ int check() //Its checks if someone won. First checkes all three rows and column
 
 void pin() //Take input from player.
 {
-    int r,c;
+    int r=0,c=0;
     cout<<"Player turn: ";
-    r=c=0;
     cin>>r>>c;
     r--;
     c--;
@@ -444,18 +443,32 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
 void ai(int b) //controls the moves AI takes.
 {
     done=0;
-    if(b==2&&a[1][1]==0)
-    {
-        a[1][1]=y;
-        cout<<"Computer turn: 2 2\n";
-        goto end;
-    }
     checkwin();
     if(!done)
     {
         find();
         if(!done)
         {
+            if(a[0][0]+a[0][2]+a[2][0]+a[2][2]==t+y||a[0][0]+a[0][2]+a[2][0]+a[2][2]==t+2*y)
+            {
+                for(int i=0;i<3;i+=2)
+                {
+                    for(int j=0;j<3;j+=2)
+                        if(a[i][j]==0)
+                        {
+                            a[i][j]=y;
+                            cout<<"Computer turn: "<<i+1<<" "<<j+1<<endl;
+                            goto end;
+                        }
+                }
+                
+            }
+            else if(b==2&&a[1][1]==0)
+            {
+                a[1][1]=y;
+                cout<<"Computer turn: 2 2\n";
+                goto end;
+            }
             win();
             if(!done)
             {
