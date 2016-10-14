@@ -265,7 +265,7 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
         {
             for(int i=2;i>=0;i--)
             {
-                if((a[i][i]==0)&&((a[i][0]+a[i][1]+a[i][2]==y&&(a[i][0]==y||a[i][1]==y||a[i][2]==y))||( (a[0][i]+a[1][i]+a[2][i]==y)&&(a[0][i]==y||a[1][i]==y||a[2][i]==y))))
+                if((a[i][i]==0)&& ((a[i][0]+a[i][1]+a[i][2]==y&&(a[i][0]==y||a[i][1]==y||a[i][2]==y)) ||( (a[0][i]+a[1][i]+a[2][i]==y)&&(a[0][i]==y||a[1][i]==y||a[2][i]==y))))
                 {
                     a[i][i]=y;
                     cout<<"Computer turn: "<<i+1<<" "<<i+1<<endl;
@@ -279,10 +279,26 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
                 {
                     if(a[i][i]==0)
                     {
-                        a[i][i]=y;
-                        cout<<"Computer turn: "<<i+1<<" "<<i+1<<endl;
-                        done=1;
-                        break;
+                        if((a[i][0]+a[i][1]+a[i][2]==t&&(a[i][0]==t||a[i][1]==t||a[i][2]==t))&&(a[0][i]+a[1][i]+a[2][i]==t&&(a[0][i]==t||a[1][i]==t||a[2][i]==t)))
+                        {
+                            a[i][i]=y;
+                            cout<<"Computer turn: "<<i+1<<" "<<i+1<<endl;
+                            done=1;
+                            break;
+                        }
+                    }
+                }
+                if(!done)
+                {
+                    for(int i=2;i>=0;i--)
+                    {
+                        if(a[i][i]==0)
+                        {
+                            a[i][i]=y;
+                            cout<<"Computer turn: "<<i+1<<" "<<i+1<<endl;
+                            done=1;
+                            break;
+                        }
                     }
                 }
             }
@@ -306,10 +322,26 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
                 {
                     if(a[i][2-i]==0)
                     {
+                        if((a[i][0]+a[i][1]+a[i][2]==t&&(a[i][0]==t||a[i][1]==t||a[i][2]==t))&&(a[0][2-i]+a[1][2-i]+a[2][2-i]==t&&(a[0][2-i]==t||a[1][2-i]==t||a[2][2-i]==t)))
+                        {
                         a[i][2-i]=y;
                         cout<<"Computer turn: "<<i+1<<" "<<3-i<<endl;
                         done=1;
                         break;
+                        }
+                    }
+                }
+                if(!done)
+                {
+                    for(int i=2;i>=0;i--)
+                    {
+                        if(a[i][2-i]==0)
+                        {
+                                a[i][2-i]=y;
+                                cout<<"Computer turn: "<<i+1<<" "<<3-i<<endl;
+                                done=1;
+                                break;
+                        }
                     }
                 }
             }
@@ -318,11 +350,11 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
     
     else
     {
-        if(a[0][0]+a[1][1]+a[2][2]==y && (a[0][0]==y||a[1][1]==y||a[2][2]==y)&&!done)
+        if(a[0][0]+a[1][1]+a[2][2]==y && (a[0][0]==y||a[1][1]==y||a[2][2]==y))
         {
-            for(int i=0;i<3;i++)
+            for(int i=2;i>=0;i--)
             {
-                if((a[i][i]==0)&&((a[i][0]+a[i][1]+a[i][2]==y&&(a[i][0]==y||a[i][1]==y||a[i][2]==y))||( (a[0][i]+a[1][i]+a[2][i]==y)&&(a[0][i]==y||a[1][i]==y||a[2][i]==y))))
+                if((a[i][i]==0)&& ((a[i][0]+a[i][1]+a[i][2]==y&&(a[i][0]==y||a[i][1]==y||a[i][2]==y)) ||( (a[0][i]+a[1][i]+a[2][i]==y)&&(a[0][i]==y||a[1][i]==y||a[2][i]==y))))
                 {
                     a[i][i]=y;
                     cout<<"Computer turn: "<<i+1<<" "<<i+1<<endl;
@@ -332,22 +364,38 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
             }
             if(!done)
             {
-                for(int i=0;i<3;i++)
+                for(int i=2;i>=0;i--)
                 {
                     if(a[i][i]==0)
                     {
-                        a[i][i]=y;
-                        cout<<"Computer turn: "<<i+1<<" "<<i+1<<endl;
-                        done=1;
-                        break;
+                        if((a[i][0]+a[i][1]+a[i][2]==t&&(a[i][0]==t||a[i][1]==t||a[i][2]==t))&&(a[0][i]+a[1][i]+a[2][i]==t&&(a[0][i]==t||a[1][i]==t||a[2][i]==t)))
+                        {
+                            a[i][i]=y;
+                            cout<<"Computer turn: "<<i+1<<" "<<i+1<<endl;
+                            done=1;
+                            break;
+                        }
+                    }
+                }
+                if(!done)
+                {
+                    for(int i=2;i>=0;i--)
+                    {
+                        if(a[i][i]==0)
+                        {
+                            a[i][i]=y;
+                            cout<<"Computer turn: "<<i+1<<" "<<i+1<<endl;
+                            done=1;
+                            break;
+                        }
                     }
                 }
             }
         }
         
-        else if( a[0][2]+a[1][1]+a[2][0]==y && (a[0][2]==y||a[1][1]==y||a[2][0]==y) &&!done)
+        else if( a[0][2]+a[1][1]+a[2][0]==y && (a[0][2]==y||a[1][1]==y||a[2][0]==y))
         {
-            for(int i=0;i<3;i++)
+            for(int i=2;i>=0;i--)
             {
                 if(a[i][2-i]==0&&((a[i][0]+a[i][1]+a[i][2]==y&&(a[i][0]==y||a[i][1]==y||a[i][2]==y))||( (a[0][2-i]+a[1][2-i]+a[2][2-i]==y)&&(a[0][2-i]==y||a[1][2-i]==y||a[2][2-i]==y))))
                 {
@@ -359,18 +407,35 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
             }
             if(!done)
             {
-                for(int i=0;i<3;i++)
+                for(int i=2;i>=0;i--)
                 {
                     if(a[i][2-i]==0)
                     {
-                        a[i][2-i]=y;
-                        cout<<"Computer turn: "<<i+1<<" "<<3-i<<endl;
-                        done=1;
-                        break;
+                        if((a[i][0]+a[i][1]+a[i][2]==t&&(a[i][0]==t||a[i][1]==t||a[i][2]==t))&&(a[0][2-i]+a[1][2-i]+a[2][2-i]==t&&(a[0][2-i]==t||a[1][2-i]==t||a[2][2-i]==t)))
+                        {
+                            a[i][2-i]=y;
+                            cout<<"Computer turn: "<<i+1<<" "<<3-i<<endl;
+                            done=1;
+                            break;
+                        }
+                    }
+                }
+                if(!done)
+                {
+                    for(int i=2;i>=0;i--)
+                    {
+                        if(a[i][2-i]==0)
+                        {
+                            a[i][2-i]=y;
+                            cout<<"Computer turn: "<<i+1<<" "<<3-i<<endl;
+                            done=1;
+                            break;
+                        }
                     }
                 }
             }
         }
+
         else
         {
             for(int i=0;i<3;i++)
@@ -614,4 +679,6 @@ void again()
     cin>>c;
     if(c=='y'||c=='Y')
         main();
+    else
+        exit(0);
 }
