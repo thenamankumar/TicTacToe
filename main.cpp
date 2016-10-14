@@ -6,6 +6,7 @@
 //  Copyright © 2016 Naman Kumar. All rights reserved.
 //
 #include <iostream>
+#include <time.h>
 using namespace std;
 
 int a[3][3],t,y,done=0;
@@ -537,10 +538,19 @@ void ai(int b) //controls the moves AI takes.
             win();
             if(!done)
             {
-                if(b==0&&a[2][2]==0)
+                if(b==0)
                 {
-                    a[2][2]=y;
-                    cout<<"Computer turn: 3 3\n";
+                    time_t seconds;
+                    time(&seconds);
+                    srand((unsigned int) seconds);
+                    
+                    a[(rand()%2)*2][(rand()%2)*2]=y;
+                    for(int i=0;i<3;i+=2)
+                    {
+                        for(int j=0;j<3;j+=2)
+                            if(a[i][j]==y)
+                                cout<<"Computer turn: "<<i+1<<" "<<j+1<<endl;
+                    }
                 }
                 else if(a[1][1]==0)
                 {
