@@ -509,10 +509,12 @@ void win() //Take a step (as to attack) such that it have winning possibilities 
 void ai(int b) //controls the moves AI takes.
 {
     done=0;
-    checkwin();
+    if(b>2)
+        checkwin();
     if(!done)
     {
-        find();
+        if(b>2)
+            find();
         if(!done)
         {
             if((a[0][0]+a[0][2]+a[2][0]+a[2][2]==t+y||a[0][0]+a[0][2]+a[2][0]+a[2][2]==t+2*y)&&a[1][1]==0)
@@ -556,22 +558,6 @@ void ai(int b) //controls the moves AI takes.
                 {
                     a[1][1]=y;
                     cout<<"Computer turn: 2 2\n";
-                }
-                else if(a[0][0]==0||a[0][2]==0||a[2][0]==0||a[2][2]==0)
-                {
-                    for(int i=0;i<3;i+=2)
-                    {
-                        for(int j=0;j<3;j+=2)
-                            if(a[i][j]==0)
-                            {
-                                a[i][j]=y;
-                                cout<<"Computer turn: "<<i+1<<" "<<j+1<<endl;
-                                done=1;
-                                break;
-                            }
-                        if(done)
-                            break;
-                    }
                 }
                 else
                 {
