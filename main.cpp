@@ -414,7 +414,6 @@ void ai(int b)
             }
             if(!attack())
             {
-                cout<<"not attack";
                 if(b==0)
                 {
                     time_t seconds;
