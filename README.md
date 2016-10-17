@@ -18,11 +18,11 @@ The same above method is used by the game to analyze the stage the decide the co
 
 The AI(int b) controlls the computer's move and is called when the computer's turn comes. The 3 different functions for each step in the process of deciding the move are called in the AI(int b), in the required order:
 
-    1) checkwin(): (Winning move) Checks if the computer is having a possible winning move. Take the step and wins.
+    1) defend(y,t,b): (Winning move) Checks if the computer is having a possible winning move. Take the step and wins.
     
-    2) find(): (Defending move) Checks if the player (opponent) have a possible winning move, takes a step as to block the player.
+    2) defend(t,y,b): (Defending move) Checks if the player (opponent) have a possible winning move, takes a step as to block the player.
     
-    3) win(): (Atacking move) Take a step such that it have winning possibilities in future moves.
+    3) attack(): (Atacking move) Take a step such that it have winning possibilities in future moves.
     
 Some other functions are being used in the game as to build up the interface and make the game work are:
 
