@@ -5,13 +5,14 @@
 //  Created by Naman Kumar on 02/10/16.
 //  Copyright © 2016 Naman Kumar. All rights reserved.
 //
+#include <stdio.h>
 #include <iostream>
+#include <string.h>
 #include <time.h>
 using namespace std;
 
-int a[3][3],t,y;
-
-void again();
+int a[3][3],t,y,game=1;
+char name[30],str[500];
 
 void print()
 {
@@ -20,7 +21,14 @@ void print()
     for(i=0;i<3;i++)
     {
         for(j=0;j<3;j++)
-            cout<<a[i][j]<<"\t";
+        {
+            if(a[i][j]==0)
+                cout<<".\t";
+            else if(a[i][j]==1)
+                cout<<"X\t";
+            else
+                cout<<"O\t";
+        }
         cout<<endl;
     }
 }
@@ -42,22 +50,27 @@ int check()
 void pin()
 {
     int r=0,c=0;
-    cout<<"Player turn: ";
-    cin>>r>>c;
+    cout<<"Enter row: ";
+    cin>>r;
+    cout<<"Enter column: ";
+    cin>>c;
     r--;
     c--;
     if(r>2||c>2||r<0||c<0)
     {
-        cout<<"Enter correct value."<<endl;
+        strcpy(str,"Enter correct value ");
+        strcat(str,name);
+        strcat(str,".\n");
+        puts(str);
         pin();
     }
     else if(a[r][c]!=0)
     {
-        cout<<"Already filled!\n";
+        cout<<"It is already filled.\n";
         pin();
     }
     else
-    a[r][c]=t;
+        a[r][c]=t;
 }
 
 int defend(int c, int p, int b)
@@ -181,10 +194,10 @@ int attack()
                         }
                     }
                 }
-            
+                
             }
         }
-    
+        
         if(a[0][0]+a[1][1]+a[2][2]==y && (a[0][0]==y||a[1][1]==y||a[2][2]==y))
         {
             for(i=2;i>=0;i--)
@@ -322,7 +335,7 @@ int attack()
                 }
             }
         }
-
+        
         else
         {
             for(i=0;i<3;i++)
@@ -452,7 +465,7 @@ void ai(int b)
             }
         }
     }
-    end:
+end:
     cout<<endl;
 }
 
@@ -462,15 +475,40 @@ int main()
     for(i=0;i<3;i++)
         for(j=0;j<3;j++)
             a[i][j]=0;
-start:
-    cout<<"Choose your turn 1st or 2nd: ";
+    if(game==1)
+    {
+        cout<<"What is your good name? ";
+        gets(name);
+        strcpy(str,"\nHi ");
+        strcat(str, name);
+        strcat(str,", so you wanna challenge me in Tic Tac Toe, right?\nLet's see who wins.");
+        puts(str);
+        
+        strcpy(str,"\nChoice is your's ");
+        strcat(str,name);
+        strcat(str,", wanna go 1st or 2nd?");
+        puts(str);
+    }
+    else
+    {
+        strcpy(str,"\nOkay so you think you can beat me this time ");
+        strcat(str,name);
+        strcat(str,".\nLet's see again if you can.");
+        puts(str);
+        
+        strcpy(str,"\nThis time you wanna go 1st or 2nd, ");
+        strcat(str,name);
+        strcat(str,"?");
+        puts(str);
+    }
+    
+input:
     cin>>t;
-    cout<<"\nPlayer Symbol: "<<t<<endl;
     switch(t)
     {
         case 1:
             y=2;
-            cout<<"Computer Symbol: "<<y<<endl;
+            cout<<"\nSo your symbol is X.\nAnd mine is O.\n\nLet's start the game.";
             print();
             for(i=0;i<9;)
             {
@@ -480,7 +518,11 @@ start:
                 if(i>4)
                     if(check())
                     {
-                        cout<<"Congratulations, You WON!";
+                        strcpy(str,"\nOh, you won ");
+                        strcat(str,name);
+                        strcat(str," .\nCongratulations\nGreat work!\n\nMy algorithm needs to be improved.\nBie.");
+                        puts(str);
+                        exit(0);
                         break;
                     }
                 if(i>=8)
@@ -491,7 +533,13 @@ start:
                 if(i>5)
                     if(check())
                     {
-                        cout<<"Computer WON, You LOOSE!";
+                        strcpy(str,"\nIt is impossible to beat me ");
+                        strcat(str,name);
+                        if(game>1)
+                            strcat(str,", you couldn't beat me this time too, I won.");
+                        else
+                            strcat(str,", I won, you loose.");
+                        puts(str);
                         break;
                     }
             }
@@ -499,7 +547,7 @@ start:
             
         case 2:
             y=1;
-            cout<<"Computer Symbol: "<<y<<endl;
+            cout<<"\nSo your symbol is O.\nAnd mine is X.\n\nLet's start the game.";
             print();
             for(i=0;i<9;)
             {
@@ -509,7 +557,13 @@ start:
                 if(i>4)
                     if(check())
                     {
-                        cout<<"Computer WON, You LOOSE!";
+                        strcpy(str,"It is impossible to beat me ");
+                        strcat(str,name);
+                        if(game>1)
+                            strcat(str,", you couldn't beat me this time too, I won.");
+                        else
+                            strcat(str,", I won, you loose.");
+                        puts(str);
                         break;
                     }
                 if(i>=8)
@@ -520,28 +574,44 @@ start:
                 if(i>5)
                     if(check())
                     {
-                        cout<<"Congratulations, You WON!";
+                        strcpy(str,"\nOh, you won ");
+                        strcat(str,name);
+                        strcat(str," .\nCongratulations\nGreat work!\n\nMy algorithm needs to be improved.\nBie.");
+                        puts(str);
+                        exit(0);
                         break;
                     }
             }
             break;
         default:
-            cout<<"Enter correct choice.\n";
-            goto start;
+            strcpy(str,"Hey, ");
+            strcat(str,name);
+            strcat(str," you need to enter either 1 or 2.");
+            puts(str);
+            cout<<"\nEnter again: ";
+            goto input;
             break;
     }
     if(!check())
-        cout<<"TIE!"<<endl;
-    again();
-    return 0;
-}
-void again()
-{
+    {
+        if(game>1)
+            cout<<"Well Played!\nBut you couldn't beat me this time too\n";
+        else
+            cout<<"Well Played!\nIt is a tie.\n";
+
+    }
     char c;
-    cout<<endl<<"Want to play again Y/N? ";
+    strcpy(str,"Wanna play again ");
+    strcat(str,name);
+    strcat(str," y/n?");
+    puts(str);
     cin>>c;
     if(c=='y'||c=='Y')
+    {
+        game++;
         main();
+    }
     else
         exit(0);
+    return 0;
 }
