@@ -14,7 +14,7 @@ using namespace std;
 int a[3][3],t,y,game=1;
 char name[30],str[500];
 
-void print()
+void print()//print the board
 {
     int i,j;
     cout<<"\n";
@@ -33,7 +33,7 @@ void print()
     }
 }
 
-int check()
+int check()//checks if anyone is winning.
 {
     for(int i=0;i<3;i++)
         if((a[i][0]!=0&&a[i][0]==a[i][1]&&a[i][1]==a[i][2])||(a[0][i]!=0&&a[0][i]==a[1][i]&&a[1][i]==a[2][i]))
@@ -47,7 +47,7 @@ int check()
         return 0;
 }
 
-void pin()
+void pin()//takes input from player
 {
     int r=0,c=0;
     cout<<"Enter row: ";
@@ -134,7 +134,7 @@ int defend(int c, int p, int b)
     return 0;
 }
 
-int attack()
+int attack()//takes a move as to win in future.
 {
     int i,j;
     if(a[0][0]+a[0][2]+a[2][0]+a[2][2]==t||a[0][0]+a[0][2]+a[2][0]+a[2][2]==2*t)
@@ -399,7 +399,7 @@ int attack()
     return 0;
 }
 
-void ai(int b)
+void ai(int b)//controls the compter's move
 {
     if(!defend(y,t,b))
     {
